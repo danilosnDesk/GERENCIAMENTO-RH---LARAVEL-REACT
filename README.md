@@ -12,6 +12,8 @@ Este é um sistema de Gestão de Recursos Humanos moderno e eficiente, desenvolv
 
 - **Registro de Ponto e Presença**: Acompanhe o horário de entrada e saída dos funcionários...
 
+- **Registro de Ponto e Presença**: Acompanhe o horário de entrada e saída dos funcionários...
+
 
 ## Tecnologias Utilizadas
 
@@ -31,3 +33,8 @@ Este é um sistema de Gestão de Recursos Humanos moderno e eficiente, desenvolv
 4. Execute as migrações do banco de dados.
 5. Inicie o servidor Laravel e o servidor de desenvolvimento do React.
 6. Acesse a aplicação através do seu navegador.
+
+## Screenshots
+
+![App Screenshot](https://github.com/danilosnDesk/GERENCIAMENTO-RH---LARAVEL-REACT/blob/master/public/sistema%20screenshots/admin1.jpg)
+
