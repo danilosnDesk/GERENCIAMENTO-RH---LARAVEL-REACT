@@ -12,8 +12,6 @@ Este é um sistema de Gestão de Recursos Humanos moderno e eficiente, desenvolv
 
 - **Registro de Ponto e Presença**: Acompanhe o horário de entrada e saída dos funcionários...
 
-- **Registro de Ponto e Presença**: Acompanhe o horário de entrada e saída dos funcionários...
-
 
 ## Tecnologias Utilizadas
 
