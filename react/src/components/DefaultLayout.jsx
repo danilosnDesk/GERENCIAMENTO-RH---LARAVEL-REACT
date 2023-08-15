@@ -1,14 +1,38 @@
 
+import { Users2, Building2, Blocks, Landmark, Wrench, Info, LogOut, TimerIcon, TimerReset, Palette } from "lucide-react";
 import { Link, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../context/ContextProvider'
-import { Users2, Building2, Blocks, Landmark, Wrench, Info, LogOut } from "lucide-react";
+
+import axiosClient from '../axios-client';
+import { useEffect } from "react";
+
 export default function DefaultLayout() {
-    const { user, token } = useStateContext();
+    const { user, token, setUser, setToken } = useStateContext();
+
     if (!token) {
         return <Navigate to="/login" />
     }
+
+    const onLogout = (ev) => {
+        ev.preventDefault();
+        axiosClient.post('/logout')
+            .then(({ data }) => {
+                setToken(null)
+                setUser({})
+                console.log(data);
+            })
+    }
+
+    useEffect(() => {
+        axiosClient.get('/user')
+            .then(({ data }) => {
+                setUser(data)
+            })
+    }, []);
+
+    console.log(user);
     return (
-        <div className="flex row dark:bg-gray-900">
+        <div className="flex row dark:bg-gray-900 li:cursor-pointer">
             <aside id="separator-sidebar" className="w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
                 <div className="h-full px-3 py-4 divide-y divide-slate-400 overflow-y-auto bg-violet-700 dark:bg-gray-800">
                     <ul className="space-y-2 font-medium">
@@ -23,10 +47,20 @@ export default function DefaultLayout() {
                                 </span>
                             </li>
                         </Link>
+                        <Link to="/users">
+                            <li>
+                                <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <Users2 className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Funcionários</span>
+                                </span>
+                            </li>
+                        </Link>
+
                         <li>
                             <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <Users2 className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                <span className="flex-1 ml-3 whitespace-nowrap">Funcionários</span>
+                                <Blocks className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+
+                                <span className="flex-1 ml-3 whitespace-nowrap">Deparatamentos</span>
                             </span>
                         </li>
                         <li>
@@ -37,24 +71,25 @@ export default function DefaultLayout() {
                                 <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">+2</span>
                             </span>
                         </li>
-                        <li>
-                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <Blocks className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-
-                                <span className="flex-1 ml-3 whitespace-nowrap">Productos</span>
-                            </span>
-                        </li>
                         <Link to="/users">
                             <li>
+
                                 <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <Building2 className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                    <span className="flex-1 ml-3 whitespace-nowrap">Fornecedores</span>
+                                    <TimerReset className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Registros de ponto</span>
                                 </span>
                             </li>
                         </Link>
                     </ul>
                     <br />
                     <ul className="space-y-2 font-medium">
+                        <li>
+                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <Palette className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <span className="flex-1 ml-3 whitespace-nowrap">tema</span>
+                                <Wrench className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                            </span>
+                        </li>
                         <Link to="/">
                             <li>
                                 <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -70,7 +105,7 @@ export default function DefaultLayout() {
                                 <span className="flex-1 ml-3 whitespace-nowrap">Sistema</span>
                             </span>
                         </li>
-                        <li>
+                        <li onClick={onLogout} className='cursor-pointer'>
                             <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <LogOut className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                                 <span className="flex-1 ml-3 whitespace-nowrap">Terminar Sessão</span>
@@ -79,9 +114,6 @@ export default function DefaultLayout() {
                     </ul>
                 </div>
             </aside>
-
-
-
             {/* Main Content */}
             <main className="flex-1">
                 <nav className='w-full'>
