@@ -15,6 +15,6 @@ class Departamento extends Model
 
     public function responsavel()
     {
-        return $this->hasMany(DepartamentoResponsavel::class, 'id_departamento');
+        return $this->belongsTo(DepartamentoResponsavel::class, 'id_departamento');
     }
 }

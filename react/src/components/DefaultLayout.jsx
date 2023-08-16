@@ -13,28 +13,36 @@ export default function DefaultLayout() {
         return <Navigate to="/login" />
     }
 
+
     const onLogout = (ev) => {
         ev.preventDefault();
         axiosClient.post('/logout')
             .then(({ data }) => {
                 setToken(null)
                 setUser({})
-                console.log(data);
             })
     }
 
     useEffect(() => {
         axiosClient.get('/user')
             .then(({ data }) => {
-                setUser(data)
+                setUser(data);
             })
+            .catch((reason) => {
+                console.log("razão " + reason);
+                const err = reason.response;
+                if (err && err.status === 401) {
+                    setToken(null);
+                }
+            });
     }, []);
+    // O array vazio como segundo argumento faz com que o efeito só seja executado após a montagem inicial do componente
 
-    console.log(user);
+
     return (
         <div className="flex row dark:bg-gray-900 li:cursor-pointer">
-            <aside id="separator-sidebar" className="w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div className="h-full px-3 py-4 divide-y divide-slate-400 overflow-y-auto bg-violet-700 dark:bg-gray-800">
+            <aside id="separator-sidebar" className=" w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+                <div className=" h-full px-3 py-4 divide-y divide-slate-400 overflow-y-auto bg-violet-700 dark:bg-gray-800">
                     <ul className="space-y-2 font-medium">
                         <Link to="/dashboard">
                             <li>
