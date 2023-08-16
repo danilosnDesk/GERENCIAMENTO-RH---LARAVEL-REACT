@@ -51,6 +51,10 @@ export default function Funcionarios() {
                 if (err && err.status === 404) {
                     console.log(404);
                 }
+                if (data.code === "ERR_NETWORK") {
+                    console.log('NETWORK ERROR');
+                    setErrors('Falha na conexão com a internet')
+                }
                 setLoading(false)
             })
     }
@@ -103,6 +107,16 @@ export default function Funcionarios() {
                             <tr>
                                 <td colSpan="6" className="text-center py-4 text-base italic">
                                     processando...
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    }
+                    {
+                        errors && <tbody>
+                            <tr>
+                                <td colSpan="6" className="text-center py-4 text-base italic">
+                                    {errors}
                                 </td>
                             </tr>
 
