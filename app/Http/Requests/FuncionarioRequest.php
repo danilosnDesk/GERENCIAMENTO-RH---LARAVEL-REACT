@@ -11,7 +11,7 @@ class FuncionarioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class FuncionarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => 'required',
+            'email' => 'required|unique:funcionarios,email',
+            'cargo' => 'required',
+            'salario' => 'numeric',
+            'telefone' => 'max:12',
+            'data_entrada' => 'date',
         ];
     }
 }

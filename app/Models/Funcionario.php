@@ -19,9 +19,13 @@ class Funcionario extends Model
         'email',
     ];
 
-    // Relação com o departamento
     public function departamento()
     {
         return $this->belongsTo(Departamento::class, 'id_departamento');
+    }
+
+    public function departamentosResponsavel()
+    {
+        return $this->hasMany(DepartamentoResponsavel::class, 'id_funcionario');
     }
 }

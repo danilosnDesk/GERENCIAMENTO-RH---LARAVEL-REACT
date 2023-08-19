@@ -18,9 +18,7 @@ class FuncionarioController extends Controller
 
     public function store(Request $request)
     {
-        return response([
-            "mensagem" => 'store'
-        ], 201);
+        return response($request, 201);
     }
 
 

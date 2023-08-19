@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Cards from "../components/Cards";
-import axiosClient from "../axios-client";
+import Cards from "../../components/Cards";
+import axiosClient from "../../axios-client";
 import { Link } from "react-router-dom";
 
 
@@ -10,7 +10,7 @@ export default function Funcionarios() {
 
     const [funcionarios, setFuncionario] = useState([]);
     const [Loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState(null);
     const [total, setTotal] = useState(0);
 
 
@@ -50,10 +50,11 @@ export default function Funcionarios() {
                 console.log(data);
                 if (err && err.status === 404) {
                     console.log(404);
+                    setErrors('Não foi possível carregar os funcionários!')
                 }
                 if (data.code === "ERR_NETWORK") {
                     console.log('NETWORK ERROR');
-                    setErrors('Falha na conexão com a internet')
+                    setErrors('Falha na conexão com o servidor - verifique a internet!')
                 }
                 setLoading(false)
             })
@@ -71,7 +72,7 @@ export default function Funcionarios() {
 
                 <h1 className="text-gray-500 text-[30px] font-light py-4 dark:text-white">Listagem dos Funcionários <span className="text-gray-400 text-base"> ({total})</span></h1>
                 <div className="py-4">
-                    <button type="button" className="text-white bg-violet-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Novo +</button>
+                    <Link to="/funcionario/novo" className="text-white bg-violet-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Novo +</Link>
                 </div>
             </div>
 
@@ -146,8 +147,8 @@ export default function Funcionarios() {
                                     matheus@empresa.com
                                 </td>
                                 <td className="px-6 py-4 flex gap-2">
-                                    <Link className="font-medium text-white p-2  bg-blue-600 dark:text-blue-500 hover:underline"><span>ver</span></Link>
-                                    <button onClick={ev => onDelete(funcionar)} className="font-medium text-white p-2  bg-red-600 dark:text-red-500 hover:underline"><span>delete</span></button>
+                                    <Link className="font-medium text-white p-2  bg-blue-600 dark:text-white hover:underline"><span>ver</span></Link>
+                                    <button onClick={ev => onDelete(funcionar)} className="font-medium text-white p-2  bg-red-600 dark:text-white hover:underline"><span>delete</span></button>
                                 </td>
                             </tr>
 

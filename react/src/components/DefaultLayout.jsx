@@ -40,88 +40,92 @@ export default function DefaultLayout() {
 
 
     return (
-        <div className="flex row dark:bg-gray-900 li:cursor-pointer">
-            <aside id="separator-sidebar" className=" w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div className=" h-full px-3 py-4 divide-y divide-slate-400 overflow-y-auto bg-violet-700 dark:bg-gray-800">
-                    <ul className="space-y-2 font-medium">
-                        <Link to="/dashboard">
+        <div className="flex flex-row dark:bg-gray-900">
+            <div className="w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
+
+                <aside className="w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" >
+                    <div className=" h-full px-3 py-4 divide-y divide-slate-400 overflow-y-auto bg-violet-700 dark:bg-gray-800">
+                        <ul className="space-y-2 font-medium">
+                            <Link to="/dashboard">
+                                <li>
+                                    <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <svg className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                                            <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                                            <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                                        </svg>
+                                        <span className="ml-3">Dashboard</span>
+                                    </span>
+                                </li>
+                            </Link>
+                            <Link to="/funcionarios">
+                                <li>
+                                    <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <Users2 className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                        <span className="flex-1 ml-3 whitespace-nowrap">Funcionários</span>
+                                    </span>
+                                </li>
+                            </Link>
+
                             <li>
                                 <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <svg className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                                        <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                                        <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                                    </svg>
-                                    <span className="ml-3">Dashboard</span>
+                                    <Blocks className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Deparatamentos</span>
                                 </span>
                             </li>
-                        </Link>
-                        <Link to="/users">
                             <li>
                                 <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <Users2 className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                    <span className="flex-1 ml-3 whitespace-nowrap">Funcionários</span>
+                                    <Landmark className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Finanças</span>
+                                    <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">+2</span>
                                 </span>
                             </li>
-                        </Link>
+                            <Link to="/users">
+                                <li>
 
-                        <li>
-                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <Blocks className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-
-                                <span className="flex-1 ml-3 whitespace-nowrap">Deparatamentos</span>
-                            </span>
-                        </li>
-                        <li>
-                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <Landmark className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-
-                                <span className="flex-1 ml-3 whitespace-nowrap">Finanças</span>
-                                <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">+2</span>
-                            </span>
-                        </li>
-                        <Link to="/users">
-                            <li>
-
-                                <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <TimerReset className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                    <span className="flex-1 ml-3 whitespace-nowrap">Registros de ponto</span>
-                                </span>
-                            </li>
-                        </Link>
-                    </ul>
-                    <br />
-                    <ul className="space-y-2 font-medium">
-                        <li>
-                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <Palette className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                <span className="flex-1 ml-3 whitespace-nowrap">tema</span>
-                                <Wrench className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                            </span>
-                        </li>
-                        <Link to="/">
+                                    <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <TimerReset className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                        <span className="flex-1 ml-3 whitespace-nowrap">Registros de ponto</span>
+                                    </span>
+                                </li>
+                            </Link>
+                        </ul>
+                        <br />
+                        <ul className="space-y-2 font-medium">
                             <li>
                                 <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <Palette className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                    <span className="flex-1 ml-3 whitespace-nowrap">tema</span>
                                     <Wrench className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                    <span className="flex-1 ml-3 whitespace-nowrap">Configurações</span>
                                 </span>
                             </li>
-                        </Link>
-                        <li>
-                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <Info className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                            <Link to="/">
+                                <li>
+                                    <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <Wrench className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                        <span className="flex-1 ml-3 whitespace-nowrap">Configurações</span>
+                                    </span>
+                                </li>
+                            </Link>
+                            <li>
+                                <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <Info className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
 
-                                <span className="flex-1 ml-3 whitespace-nowrap">Sistema</span>
-                            </span>
-                        </li>
-                        <li onClick={onLogout} className='cursor-pointer'>
-                            <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <LogOut className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                <span className="flex-1 ml-3 whitespace-nowrap">Terminar Sessão</span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Sistema</span>
+                                </span>
+                            </li>
+                            <li onClick={onLogout} className='cursor-pointer'>
+                                <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <LogOut className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Terminar Sessão</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+
             {/* Main Content */}
             <main className="flex-1">
                 <nav className='w-full'>

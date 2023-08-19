@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('cargo');
             $table->decimal('salario', 10, 2);
             $table->unsignedBigInteger('id_departamento');
-            $table->string('telefone');
-            $table->string('email');
+            $table->string('telefone')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
             $table->foreign('id_departamento')
             ->references('id')

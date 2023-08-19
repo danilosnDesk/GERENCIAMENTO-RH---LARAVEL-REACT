@@ -12,8 +12,8 @@ export default function Signup() {
 
     const { setUser, setToken } = useStateContext();
     const [errors, setErrors] = useState(null);
-    const onSubmit = (e) => {
 
+    const onSubmit = (e) => {
         e.preventDefault();
 
         const payload = {
@@ -98,7 +98,7 @@ export default function Signup() {
                 <div>
                     <button
                         type="submit"
-                        className="w-full bg-white px-4 py-2 font-medium text-center text-violet-600 transition-colors duration-200 rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker"
+                        className="w-full bg-white px-4 py-2 font-medium text-center text-violet-600 transition-colors duration-200 rounded-md  hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 dark:focus:ring-offset-darker"
                     >
                         sign up
                     </button>

@@ -13,8 +13,8 @@ class Departamento extends Model
         'nome',
     ];
 
-    public function responsavel()
+    public function responsaveis()
     {
-        return $this->belongsTo(DepartamentoResponsavel::class, 'id_departamento');
+        return $this->hasMany(DepartamentoResponsavel::class, 'id_departamento');
     }
 }
