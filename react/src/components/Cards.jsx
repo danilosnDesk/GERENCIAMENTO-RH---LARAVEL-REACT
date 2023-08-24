@@ -1,6 +1,30 @@
 import { Blocks, Building2, Users2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import axiosClient from "../axios-client";
 
 export default function Cards() {
+
+    const [funcionario, setFuncionarios] = useState([]);
+    const [departamanto, setDepartamantos] = useState([]);
+    const [Loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true)
+        axiosClient
+            .get('/departamanto_funcionarios')
+            .then(({ data }) => {
+                setLoading(false)
+                setFuncionarios(data.det_total_func)
+                setDepartamantos(data.det_names)
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err);
+            })
+            .finally = () => {
+                setLoading(false)
+            }
+    }, []);
     return (
         <div className="flex flex-row w-full justify-between py-5 ">
 

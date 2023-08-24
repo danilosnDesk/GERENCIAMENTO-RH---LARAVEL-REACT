@@ -81,9 +81,6 @@ export default function Funcionarios() {
                     <thead className="text-xs text-gray-700 bg-gray-200 uppercase  dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Nº
-                            </th>
-                            <th scope="col" className="px-6 py-3">
                                 Nome
                             </th>
                             <th scope="col" className="px-6 py-3">
@@ -127,9 +124,6 @@ export default function Funcionarios() {
                         {funcionarios.map(funcionar => (
                             <tr key={funcionar.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td className="px-6 py-4 hover:underline cursor-pointer">
-                                    {funcionar.id}
-                                </td>
-                                <td className="px-6 py-4 hover:underline cursor-pointer">
                                     {funcionar.nome}
                                 </td>
                                 <td className="px-6 py-4">
@@ -144,7 +138,8 @@ export default function Funcionarios() {
 
                                 </td>
                                 <td className="px-6 py-4">
-                                    matheus@empresa.com
+                                    {funcionar.email}
+
                                 </td>
                                 <td className="px-6 py-4 flex gap-2">
                                     <Link className="font-medium text-white p-2  bg-blue-600 dark:text-white hover:underline"><span>ver</span></Link>

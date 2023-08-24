@@ -4,8 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FuncionarioRequest extends FormRequest
+class StoreFuncionarioRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
@@ -20,10 +23,11 @@ class FuncionarioRequest extends FormRequest
     {
         return [
             'nome' => 'required',
-            'email' => 'required|unique:funcionarios,email',
+            'email' => 'required|email|unique:funcionarios,email',
             'cargo' => 'required',
-            'salario' => 'numeric',
-            'telefone' => 'max:12',
+            'salario' => 'required',
+            'id_departamento' => 'required',
+            'telefone' => 'nullable|max:12',
             'data_entrada' => 'date',
         ];
     }

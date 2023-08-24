@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Http\Resources\FuncionarioResource;
+use App\Http\Requests\StoreFuncionarioRequest;
 
 class FuncionarioController extends Controller
 {
@@ -16,9 +17,14 @@ class FuncionarioController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreFuncionarioRequest $request)
     {
-        return response($request, 201);
+        $dados = $request->validated();
+
+        Funcionario::create($dados);
+
+        return response([], 201);
+
     }
 
 

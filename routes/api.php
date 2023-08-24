@@ -13,7 +13,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('funcionarios', FuncionarioController::class);
     Route::apiResource('departmentos', DepartamentoController::class);
 
+    // dep => funcio
+
+
 });
+
+Route::get('/departamanto_funcionarios', [DepartamentoController::class , 'departamanto_funcionarios']);
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login']);

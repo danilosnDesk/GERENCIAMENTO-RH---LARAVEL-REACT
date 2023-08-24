@@ -1,11 +1,15 @@
 import { TEInput } from "tw-elements-react";
 import axiosClient from "../../axios-client";
 import { useEffect, useRef, useState } from "react";
+import { Ban } from "lucide-react";
 
 
 export default function CreateFuncionario() {
 
     const [departamentos, setDepartamentos] = useState([]);
+    const [Loading, setLoading] = useState(false);
+    const [Erros, setErros] = useState(null);
+    const [NetworkError, setNetworkError] = useState(null);
 
     const nomeREF = useRef();
     const salarioREF = useRef();
@@ -18,16 +22,16 @@ export default function CreateFuncionario() {
 
     const NovoFuncionario = (ev) => {
         ev.preventDefault();
-
+        setLoading(true);
 
         const payload = {
             nome: nomeREF.current.value,
             salario: salarioREF.current.value,
-            departamento: departamentoREF.current.value,
+            id_departamento: departamentoREF.current.value,
             email: emailREF.current.value,
             telefone: telefoneREF.current.value,
             cargo: cargoREF.current.value,
-            entrada: entradaREF.current.value,
+            data_entrada: entradaREF.current.value,
         };
 
         //console.log(payload);
@@ -35,18 +39,41 @@ export default function CreateFuncionario() {
         axiosClient.post('/funcionarios', payload)
             .then((data) => {
                 console.log(data);
+                setLoading(false);
             })
-            .catch((err) => {
-                console.log(err);
+            .catch(data => {
+                const response = data.response;
+
+                if (response && response.status === 500) {
+                    setErros("Falha no servidor, tente recarregar a página")
+                }
+                if (response && response.status === 422) {
+                    setErros(response.data.errors)
+                }
+                if (data.code === "ERR_NETWORK") {
+                    console.log('NETWORK ERROR');
+                    setNetworkError('Falha na conexão com o servidor - verifique a internet!')
+                }
+
+                setLoading(false);
+            })
+
+            .finally(() => {
+                setLoading(false);
             });
 
     }
+
     useEffect(() => {
         axiosClient.get('/departmentos')
             .then(({ data }) => {
                 console.log(data);
                 setDepartamentos(data.data);
-            }).catch((err) => {
+            }).catch(Erroor => {
+                const err = Erroor.response;
+
+
+
                 console.log(err);
             });
 
@@ -59,6 +86,29 @@ export default function CreateFuncionario() {
     return (
         <div className="py-4 px-8">
             <h1 className="text-gray-500 text-[30px] font-light py-4 dark:text-white capitalize">Novo funcionário </h1>
+
+            {Erros &&
+                <div className="py-7">
+                    {Object.keys(Erros).map(keys => (
+                        <p className="bg-red-500 py-2 my-2 px-1 flex items-center gap-2 rounded text-slate-50" >
+                            <Ban className="w-[16px]" />
+                            <span>
+                                {Erros[keys][0]}
+                            </span>
+                        </p>
+                    ))}
+                </div>
+            }
+            {NetworkError &&
+                <div className="py-7">
+                    <p className="bg-red-500 py-2 my-2 px-1 flex items-center gap-2 rounded text-slate-50" >
+                        <Ban className="w-[16px]" />
+                        <span>
+                            {NetworkError}
+                        </span>
+                    </p>
+                </div>
+            }
 
             <form className="flex flex-col gap-7">
 
@@ -147,7 +197,9 @@ export default function CreateFuncionario() {
                 </div>
 
                 <div className="py-8">
-                    <button onClick={NovoFuncionario} className="rounded shadow text-white bg-violet-700 py-2 px-4 w-[170px]">Cadastar</button>
+                    <button onClick={NovoFuncionario} className="rounded shadow text-white bg-violet-700 py-2 px-4 w-[170px]">
+                        {Loading ? 'carregendo...' : 'Cadastrar'}
+                    </button>
                 </div>
             </form >
 
