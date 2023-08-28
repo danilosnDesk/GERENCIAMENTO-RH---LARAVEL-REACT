@@ -15,11 +15,11 @@ class DepartamentoResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-
             'id' => $this->id,
             'nome' => $this->name,
-            'criacao' => $this->created_at,
-            'chefia' => $this->responsaveis,
+            'criacao' => $this->created_at->format('m-Y'),
+            'chefia' => FuncionarioResource::collection($this->responsaveis),
+            'funcionarios' => FuncionarioResource::collection($this->funcionarios),
         ];
     }
 }

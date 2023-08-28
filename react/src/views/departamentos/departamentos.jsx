@@ -1,7 +1,46 @@
 import { Link } from "react-router-dom";
-import Deparatamento from "../../components/Departamento";
+import ErrorComponent from "../../components/ErrorComponent.jsx";
+import Deparatamento from "../../components/departamento/Departamento.jsx";
+import {useEffect, useState} from "react";
+import axiosClient from "../../axios-client.js";
+import {Ban} from "lucide-react";
 
 export default function departamantos() {
+    const [departamentos, setDepartamentos] = useState([]);
+    const [Loading, setLoading] = useState(false);
+    const [Erros, setErros] = useState(null);
+
+    const getDepartamentos = () => {
+    setLoading(true)
+            axiosClient.get('/departmentos')
+                .then(({ data }) => {
+                    console.log(data);
+                    setDepartamentos(data.data);
+                    setLoading(false)
+                }).catch(Erroor => {
+                const response = Erroor.response;
+                if (response && response.status === 500) {
+                    setErros("Falha no servidor, tente recarregar a página")
+                }
+                if (response && response.status === 422) {
+                    setErros(response.data.errors)
+                }
+                if (Erroor.code === "ERR_NETWORK") {
+                    console.log('NETWORK ERROR');
+                    setErros('Falha na conexão com o servidor - verifique a internet!')
+                }
+                setLoading(false)
+
+            }).finally(()=>{
+                setLoading(false)
+            });
+    }
+useEffect(() => {
+    getDepartamentos()
+    }, []);
+
+    console.log(Erros)
+
     return (
         <div className="py-4 px-8">
             <div className="flex justify-between items-center">
@@ -13,16 +52,11 @@ export default function departamantos() {
             </div>
 
             <div className="w-full flex gap-2 flex-row flex-wrap justify-start relative mt-10">
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
-                <Deparatamento />
+                {Loading && <span className='text-slate-400'>Carregando departamentos....</span>}
+                {Erros && <ErrorComponent errors={Erros}/>}
+                {departamentos.map(departamen => (
+                    <Deparatamento ID={departamen.id} Nome={departamen.nome}  responsavel={departamen.chefia[0]}/>
+                ))}
             </div>
         </div>
     )

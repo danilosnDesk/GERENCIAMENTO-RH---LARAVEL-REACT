@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreign('id_funcionario')->references('id')
             ->on('funcionarios')
             ->onDelete('cascade')
-            ->onDelete('cascade');
+            ->onUpdate('cascade');
 
             $table->foreign('id_departamento')->references('id')
             ->on('departamentos')
-            ->onUpdate('cascade')
+            ->onDelete('cascade')
             ->onUpdate('cascade');
         });
     }

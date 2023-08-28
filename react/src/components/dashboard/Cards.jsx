@@ -1,6 +1,6 @@
 import { Blocks, Building2, Users2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import axiosClient from "../axios-client";
+import axiosClient from "../../axios-client.js";
 
 export default function Cards() {
 

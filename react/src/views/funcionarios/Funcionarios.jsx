@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Cards from "../../components/Cards";
+import Cards from "../../components/dashboard/Cards.jsx";
 import axiosClient from "../../axios-client";
 import { Link } from "react-router-dom";
 
@@ -142,7 +142,7 @@ export default function Funcionarios() {
 
                                 </td>
                                 <td className="px-6 py-4 flex gap-2">
-                                    <Link className="font-medium text-white p-2  bg-blue-600 dark:text-white hover:underline"><span>ver</span></Link>
+                                    <Link to="/funcionario/perfil" className="font-medium text-white p-2  bg-blue-600 dark:text-white hover:underline"><span>ver</span></Link>
                                     <button onClick={ev => onDelete(funcionar)} className="font-medium text-white p-2  bg-red-600 dark:text-white hover:underline"><span>delete</span></button>
                                 </td>
                             </tr>

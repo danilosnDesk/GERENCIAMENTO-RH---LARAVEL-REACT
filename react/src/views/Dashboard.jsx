@@ -1,5 +1,5 @@
-import Cards from "../components/Cards";
-import ChartDonut from "../components/Chart";
+import Cards from "../components/dashboard/Cards.jsx";
+import ChartDonut from "../components/dashboard/Chart.jsx";
 
 const Dashboard = () => {
 

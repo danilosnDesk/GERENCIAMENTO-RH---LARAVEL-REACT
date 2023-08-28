@@ -26,7 +26,6 @@ class FuncionarioResource extends JsonResource
             'email' => $this->email,
             'departamento' => [
                'nome' => $this->departamento->name,
-              //  'chefe' => $this->departamento->responsavel->id_funcionario,
             ] ,
         ];
     }

@@ -12,16 +12,12 @@ class DepartamentoController extends Controller
 {
     public function index()
     {
-
         return DepartamentoResource::collection(Departamento::all());
-
     }
 
     public function departamanto_funcionarios()
     {
-
         $data =Departamento::with('funcionarios')->get();
-
         foreach ($data as $dep) {
             if ($dep->funcionarios->count()) {
                 $det_names[] = $dep->name;
@@ -29,7 +25,6 @@ class DepartamentoController extends Controller
             }
         }
         return response(compact('det_names','det_total_func'),200);
-
     }
 
 
