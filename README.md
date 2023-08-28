@@ -31,8 +31,10 @@ Este é um sistema de Gestão de Recursos Humanos moderno e eficiente, desenvolv
 2. Configure o ambiente PHP com Laravel.
 3. Configure o ambiente Node.js para o React.
 4. Execute as migrações do banco de dados.
-5. Inicie o servidor Laravel e o servidor de desenvolvimento do React.
-6. Acesse a aplicação através do seu navegador.
+5. Execute os seeds do banco de dados.
+*Para migrar e executar os seeds: php artisan migrate --seed*
+6. Inicie o servidor Laravel e o servidor de desenvolvimento do React.
+7. Acesse a aplicação através do seu navegador.
 
 ## Screenshots
 
