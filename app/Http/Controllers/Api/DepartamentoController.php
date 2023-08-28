@@ -35,9 +35,9 @@ class DepartamentoController extends Controller
     }
 
 
-    public function show(string $id)
+    public function show(Departamento $departamento)
     {
-        //
+      return new DepartamentoResource($departamento);
     }
 
 

@@ -40,9 +40,10 @@ export default function DefaultLayout() {
 
 
     return (
-        <div className="flex flex-row dark:bg-gray-900">
-            <div className="w-64 h-screen  min-h-full transition-transform -translate-x-full sm:translate-x-0 bg-violet-700 dark:bg-gray-800">
-                <div className="px-3  h-full py-4 divide-y divide-slate-400 overflow-y-auto">
+        <div className="flex defaultLayout dark:bg-gray-900">
+            <aside className="w-[240px] p-4 bg-[#5b08a7] dark:bg-gray-800">
+                <div className="h-full py-4 divide-y divide-slate-400 overflow-y-auto">
+
                     <ul className="space-y-2 font-medium">
                         <Link to="/dashboard">
                             <li>
@@ -125,10 +126,10 @@ export default function DefaultLayout() {
                         </li>
                     </ul>
                 </div>
-            </div>
 
-            {/* Main Content */}
-            <main className="flex-1">
+            </aside>
+
+            <main className=" flex-1">
                 <nav className='w-full'>
                     <ul className='flex gap-4 items-center justify-end bg-white dark:bg-gray-700 shadow-md py-4 px-8'>
                         <li>

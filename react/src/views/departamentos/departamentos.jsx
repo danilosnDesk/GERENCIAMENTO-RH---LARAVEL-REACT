@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import ErrorComponent from "../../components/ErrorComponent.jsx";
 import Deparatamento from "../../components/departamento/Departamento.jsx";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axiosClient from "../../axios-client.js";
-import {Ban} from "lucide-react";
+import { Ban } from "lucide-react";
 
 export default function departamantos() {
     const [departamentos, setDepartamentos] = useState([]);
@@ -11,13 +11,13 @@ export default function departamantos() {
     const [Erros, setErros] = useState(null);
 
     const getDepartamentos = () => {
-    setLoading(true)
-            axiosClient.get('/departmentos')
-                .then(({ data }) => {
-                    console.log(data);
-                    setDepartamentos(data.data);
-                    setLoading(false)
-                }).catch(Erroor => {
+        setLoading(true)
+        axiosClient.get('/departmentos')
+            .then(({ data }) => {
+                console.log(data);
+                setDepartamentos(data.data);
+                setLoading(false)
+            }).catch(Erroor => {
                 const response = Erroor.response;
                 if (response && response.status === 500) {
                     setErros("Falha no servidor, tente recarregar a página")
@@ -31,12 +31,12 @@ export default function departamantos() {
                 }
                 setLoading(false)
 
-            }).finally(()=>{
+            }).finally(() => {
                 setLoading(false)
             });
     }
-useEffect(() => {
-    getDepartamentos()
+    useEffect(() => {
+        getDepartamentos()
     }, []);
 
     console.log(Erros)
@@ -51,11 +51,11 @@ useEffect(() => {
                 </div>
             </div>
 
-            <div className="w-full flex gap-2 flex-row flex-wrap justify-start relative mt-10">
+            <div className="w-full flex gap-2 flex-row flex-wrap justify-start relative">
                 {Loading && <span className='text-slate-400'>Carregando departamentos....</span>}
-                {Erros && <ErrorComponent errors={Erros}/>}
+                {Erros && <ErrorComponent errors={Erros} />}
                 {departamentos.map(departamen => (
-                    <Deparatamento ID={departamen.id} Nome={departamen.nome}  responsavel={departamen.chefia[0]}/>
+                    <Deparatamento ID={departamen.id} Nome={departamen.nome} responsavel={departamen.chefia[0]} />
                 ))}
             </div>
         </div>
