@@ -17,7 +17,7 @@ class DepartamentoResource extends JsonResource
         return [
             'id' => $this->id,
             'nome' => $this->name,
-           // 'criacao' => $this->created_at->format('Y-m'),
+            'criacao' => $this->created_at->format('m-Y'),
             'chefia' => FuncionarioResource::collection($this->responsaveis),
             'funcionarios' => FuncionarioResource::collection($this->funcionarios),
         ];

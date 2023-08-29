@@ -42,8 +42,10 @@ export default function DefaultLayout() {
     return (
         <div className="flex defaultLayout dark:bg-gray-900">
             <aside className="w-[240px] p-4 bg-[#5b08a7] dark:bg-gray-800">
-                <div className="h-full py-4 divide-y divide-slate-400 overflow-y-auto">
-
+                <div className="h-full pb-4 divide-y divide-slate-400 overflow-y-auto">
+                    <div className="flex py-4 items-center justify-center text-white font-body">
+                        <span className="text-lg text-center">RH MANAGMANT</span>
+                    </div>
                     <ul className="space-y-2 font-medium">
                         <Link to="/dashboard">
                             <li>
@@ -145,10 +147,10 @@ export default function DefaultLayout() {
                         </li>
 
                     </ul>
-
                 </nav>
                 <Outlet />
             </main>
+
         </div>
     )
 }

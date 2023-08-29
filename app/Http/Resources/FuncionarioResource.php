@@ -22,6 +22,7 @@ class FuncionarioResource extends JsonResource
             'nome' => $this->nome,
             'data_entrada' => $this->data_entrada,
             'cargo' => $this->cargo,
+            'telefone' => $this->telefone,
             'salario' => $salario,
             'email' => $this->email,
             'departamento' => [

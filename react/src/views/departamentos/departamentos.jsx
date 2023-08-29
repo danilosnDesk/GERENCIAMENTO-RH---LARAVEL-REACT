@@ -54,7 +54,7 @@ export default function departamantos() {
             <div className="w-full flex gap-2 flex-row flex-wrap justify-start relative">
                 {Loading && <span className='text-slate-400'>Carregando departamentos....</span>}
                 {Erros && <ErrorComponent errors={Erros} />}
-                {departamentos.map(departamen => (
+                {!Loading && departamentos.map(departamen => (
                     <Deparatamento ID={departamen.id} Nome={departamen.nome} responsavel={departamen.chefia[0]} />
                 ))}
             </div>

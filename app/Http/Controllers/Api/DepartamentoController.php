@@ -35,9 +35,9 @@ class DepartamentoController extends Controller
     }
 
 
-    public function show(Departamento $departamento)
+    public function show($id)
     {
-      return new DepartamentoResource($departamento);
+         return new DepartamentoResource(Departamento::where('id',$id)->first());
     }
 
 

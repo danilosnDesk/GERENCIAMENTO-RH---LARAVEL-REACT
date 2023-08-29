@@ -13,7 +13,7 @@ class FuncionarioController extends Controller
 
     public function index()
     {
-        return FuncionarioResource::collection(Funcionario::query()->orderBy('id','desc')->paginate(5));
+        return FuncionarioResource::collection(Funcionario::query()->orderBy('id','desc')->paginate(50));
     }
 
 
@@ -30,9 +30,7 @@ class FuncionarioController extends Controller
 
     public function show(string $id)
     {
-        return response([
-            "mensagem" => 'show'
-        ], 200);
+         return new FuncionarioResource(Funcionario::where('id',$id)->first());
     }
 
 

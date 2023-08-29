@@ -34,7 +34,7 @@ const router = createBrowserRouter([
                 element: <CreateFuncionario />
             },
             {
-                path: '/funcionario/perfil',
+                path: '/funcionario/:id',
                 element: <FuncionarioPerfil />
             },
             {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
                 element: <Departamentos />
             },
             {
-                path: '/departamentos/funcionarios',
+                path: '/departamento/:id',
                 element: <DepartamentoFuncionarios />
             },
             {

@@ -1,11 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
-export default function FuncionariosTable() {
-    const [funcionarios, setFuncionario] = useState([]);
-    const [Loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState(null);
-
+export default function FuncionariosTable({ data }) {
     const onDelete = (funcionar) => {
 
         if (!window.confirm('Are you sure want to delete ' + funcionar.nome + '?')) {
@@ -15,7 +12,6 @@ export default function FuncionariosTable() {
         axiosClient.delete(`/funcionarios/${funcionar.id}`)
             .then((data) => {
                 console.log(data);
-                getFuncionarios();
             })
             .catch((err) => {
                 console.log(err);
@@ -47,56 +43,51 @@ export default function FuncionariosTable() {
                         </th>
                     </tr>
                 </thead>
+                {data.length < 1 ?
+                    (
+                        <tbody>
+                            <tr>
+                                <td colSpan="6" className="text-center py-4 text-base italic">
+                                    Nenhum funcionário neste departamento
+                                </td>
+                            </tr>
+                        </tbody>
+                    )
+                    :
+                    (
+                        <tbody>
+                            {data.map(funcionar => (
+                                <tr key={funcionar.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td className="px-6 py-4 hover:underline cursor-pointer">
+                                        {funcionar.nome}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {funcionar.cargo}
 
-                {
-                    Loading && <tbody>
-                        <tr>
-                            <td colSpan="6" className="text-center py-4 text-base italic">
-                                processando...
-                            </td>
-                        </tr>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {funcionar.salario} kzs
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {funcionar.departamento.nome}
 
-                    </tbody>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {funcionar.email}
+
+                                    </td>
+                                    <td className="px-6 py-4 flex gap-2">
+                                        <Link to={`/funcionario/${funcionar.id}`} className="font-medium text-white p-2  bg-blue-600 dark:text-white hover:underline"><span>ver</span></Link>
+                                        <button onClick={ev => onDelete(funcionar)} className="font-medium text-white p-2  bg-red-600 dark:text-white hover:underline"><span>delete</span></button>
+                                    </td>
+                                </tr>
+
+                            ))}
+                        </tbody>
+
+                    )
+
                 }
-                {
-                    errors && <tbody>
-                        <tr>
-                            <td colSpan="6" className="text-center py-4 text-base italic">
-                                {errors}
-                            </td>
-                        </tr>
-
-                    </tbody>
-                }
-                {!Loading && <tbody>
-                    {funcionarios.map(funcionar => (
-                        <tr key={funcionar.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td className="px-6 py-4 hover:underline cursor-pointer">
-                                {funcionar.nome}
-                            </td>
-                            <td className="px-6 py-4">
-                                {funcionar.cargo}
-
-                            </td>
-                            <td className="px-6 py-4">
-                                {funcionar.salario} kzs
-                            </td>
-                            <td className="px-6 py-4">
-                                {funcionar.departamento.nome}
-
-                            </td>
-                            <td className="px-6 py-4">
-                                {funcionar.email}
-
-                            </td>
-                            <td className="px-6 py-4 flex gap-2">
-                                <Link className="font-medium text-white p-2  bg-blue-600 dark:text-white hover:underline"><span>ver</span></Link>
-                                <button onClick={ev => onDelete(funcionar)} className="font-medium text-white p-2  bg-red-600 dark:text-white hover:underline"><span>delete</span></button>
-                            </td>
-                        </tr>
-
-                    ))}
-                </tbody>}
             </table>
         </div>
     )
