@@ -50,7 +50,7 @@ const router = createBrowserRouter([
                 element: <FormDepartamento />
             },
             {
-                path: '/departamentos/atualizar',
+                path: '/departamentos/atualizar/:id',
                 element: <FormDepartamento />
             },
             {

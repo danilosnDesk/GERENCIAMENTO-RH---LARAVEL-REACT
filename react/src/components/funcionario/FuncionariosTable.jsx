@@ -58,21 +58,21 @@ export default function FuncionariosTable({ data }) {
                         <tbody>
                             {data.map(funcionar => (
                                 <tr key={funcionar.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td className="px-6 py-4 hover:underline cursor-pointer">
+                                    <td className="px-4 py-4 hover:underline cursor-pointer">
                                         {funcionar.nome}
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         {funcionar.cargo}
 
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         {funcionar.salario} kzs
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         {funcionar.departamento.nome}
 
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         {funcionar.email}
 
                                     </td>

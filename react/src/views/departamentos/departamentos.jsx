@@ -39,7 +39,8 @@ export default function departamantos() {
         getDepartamentos()
     }, []);
 
-    console.log(Erros)
+
+
 
     return (
         <div className="py-4 px-8">

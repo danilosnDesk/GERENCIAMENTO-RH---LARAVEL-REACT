@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Departamento;
 use DB;
 use App\Http\Resources\DepartamentoResource;
+use App\Http\Requests\DepartamentoRequest;
 
 class DepartamentoController extends Controller
 {
@@ -29,9 +30,16 @@ class DepartamentoController extends Controller
 
 
 
-    public function store(Request $request)
+    public function store(DepartamentoRequest $request)
     {
-        //
+         $dados = $request->validated();
+
+         Departamento::create($dados);
+
+         return response([
+            "mensagem" => "Criado",
+         ], 201);
+
     }
 
 
@@ -41,9 +49,14 @@ class DepartamentoController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(DepartamentoRequest $request, string $id)
     {
-        //
+         $dados = $request->validated();
+         $departamento = Departamento::find($id);
+         $departamento->update($dados);
+         return response([
+            "mensagem" => "updated",
+         ], 200);
     }
 
 

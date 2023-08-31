@@ -1,16 +1,18 @@
 import { TEInput } from "tw-elements-react";
 import axiosClient from "../../axios-client";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Ban } from "lucide-react";
+import SuccessComponent from "../../components/SuccessComponent";
+import ErrorComponent from "../../components/ErrorComponent";
 
 
 export default function CreateFuncionario() {
-
     const [departamentos, setDepartamentos] = useState([]);
     const [Loading, setLoading] = useState(false);
     const [Erros, setErros] = useState(null);
     const [NetworkError, setNetworkError] = useState(null);
-
+    const [created, setCreacted] = useState(false);
     const nomeREF = useRef();
     const salarioREF = useRef();
     const departamentoREF = useRef();
@@ -18,6 +20,7 @@ export default function CreateFuncionario() {
     const telefoneREF = useRef();
     const cargoREF = useRef();
     const entradaREF = useRef();
+    const navigate = useNavigate();
 
 
     const NovoFuncionario = (ev) => {
@@ -38,6 +41,7 @@ export default function CreateFuncionario() {
 
         axiosClient.post('/funcionarios', payload)
             .then((data) => {
+                navigate('/funcionarios')
                 console.log(data);
                 setLoading(false);
             })
@@ -71,9 +75,6 @@ export default function CreateFuncionario() {
                 setDepartamentos(data.data);
             }).catch(Erroor => {
                 const err = Erroor.response;
-
-
-
                 console.log(err);
             });
 
@@ -100,14 +101,10 @@ export default function CreateFuncionario() {
                 </div>
             }
             {NetworkError &&
-                <div className="py-7">
-                    <p className="bg-red-500 py-2 my-2 px-1 flex items-center gap-2 rounded text-slate-50" >
-                        <Ban className="w-[16px]" />
-                        <span>
-                            {NetworkError}
-                        </span>
-                    </p>
-                </div>
+                <ErrorComponent errors={NetworkError} />
+            }
+            {created &&
+                <SuccessComponent mensagem="Funcionario criado com sucesso" />
             }
 
             <form className="flex flex-col gap-7">

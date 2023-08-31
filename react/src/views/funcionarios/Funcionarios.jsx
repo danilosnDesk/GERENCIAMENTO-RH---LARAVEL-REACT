@@ -80,22 +80,22 @@ export default function Funcionarios() {
                 <table className="w-full text-sm text-left  text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 bg-gray-200 uppercase  dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-4 py-3">
                                 Nome
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-4 py-3">
                                 Cargo
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-4 py-3">
                                 Salário
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-4 py-3">
                                 Departamento
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-4 py-3">
                                 Email
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className="px-4 py-3">
                             </th>
                         </tr>
                     </thead>
@@ -126,18 +126,18 @@ export default function Funcionarios() {
                                 <td className="px-6 py-4 hover:underline cursor-pointer">
                                     {funcionar.nome}
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-3 py-4">
                                     {funcionar.cargo}
 
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-3 py-4">
                                     {funcionar.salario} kzs
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-3 py-4">
                                     {funcionar.departamento.nome}
 
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-3 py-4">
                                     {funcionar.email}
 
                                 </td>

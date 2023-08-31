@@ -12,7 +12,7 @@ class Departamento extends Model
 
 
      protected $fillable = [
-        'nome',
+        'name',
     ];
 
     public function responsaveis()

@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { Edit, Trash2 } from "lucide-react";
 
 export default function Deparatamento({ ID, Nome, responsavel }) {
+    const onDelete = () => {
+
+    }
     return (
         <Link to={`/departamento/${ID}`} className="w-[80%] overflow-hidden sm:w-1/4   rounded-lg bg-white dark:bg-gray-700 m-2 shadow-xl relative">
             <div className="w-full h-1 bg-violet-300 dark:bg-gray-200 absolute top-0"></div>
@@ -9,9 +13,8 @@ export default function Deparatamento({ ID, Nome, responsavel }) {
                     {Nome}
                 </h4>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                    ab in quis quod quo
-                    Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit. Sint,
+                    Gerencie os funcionários
+                    deste departamento com apenas clicando.
                 </p>
             </div>
 
@@ -38,12 +41,12 @@ export default function Deparatamento({ ID, Nome, responsavel }) {
                 </div>)
             }
 
-            <a className="w-4 h-4 cursor-pointer absolute top-4 pb-4 right-2" >
-                <i className="fi fi-rr-edit text-orange-500 hover:text-lg"></i>
-            </a>
-            <a className="w-4 h-4 cursor-pointer absolute top-4 pb-4 right-5 mr-2" >
-                <i className="fi fi-rr-trash text-red-700"></i>
-            </a>
+            <Link to={`/departamentos/atualizar/${ID}`} className="w-4 h-4 cursor-pointer absolute top-4 pb-4 right-2" >
+                <Edit className="text-slate-400 hover:text-orange-600 w-[15px] " />
+            </Link>
+            <button className="w-4 h-4 cursor-pointer absolute top-4 pb-4 right-5 mr-2" onClick={onDelete} >
+                <Trash2 className="text-slate-400 hover:text-red-600 w-[15px]" />
+            </button>
         </Link>
 
     )
