@@ -38,5 +38,5 @@ Este é um sistema de Gestão de Recursos Humanos moderno e eficiente, desenvolv
 
 ## Screenshots
 
-![App Screenshot](https://github.com/danilosnDesk/GERENCIAMENTO-RH---LARAVEL-REACT/blob/master/public/sistema%20screenshots/admin1.jpg)
+![App Screenshot](https://github.com/danilosnDesk/GERENCIAMENTO-RH---LARAVEL-REACT/blob/master/public/sistema%20screenshots/ecraa.jpg)
 
