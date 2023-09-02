@@ -86,7 +86,7 @@ export default function DefaultLayout() {
                                 </span>
                             </li>
                         </Link>
-                        <Link to="/users">
+                        <Link to="/pontos">
                             <li>
 
                                 <span className="flex items-center p-2 text-white  hover:text-gray-500 dark:text-slate-300 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700 group">

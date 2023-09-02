@@ -13,7 +13,7 @@ class FuncionarioController extends Controller
 
     public function index()
     {
-        return FuncionarioResource::collection(Funcionario::query()->orderBy('id','desc')->paginate(50));
+        return FuncionarioResource::collection(Funcionario::query()->orderBy('id','desc')->paginate(2));
     }
 
 

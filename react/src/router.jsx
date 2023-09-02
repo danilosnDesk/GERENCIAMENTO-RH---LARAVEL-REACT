@@ -11,6 +11,7 @@ import Departamentos from "./views/departamentos/departamentos";
 import DepartamentoFuncionarios from "./views/departamentos/DepartamentoFuncionarios";
 import FormDepartamento from "./views/departamentos/FormDepartamento";
 import NOtFund from "./components/NOtFund";
+import Pontos from "./views/ponto/pontos";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: '/departamentos/atualizar/:id',
                 element: <FormDepartamento />
+            },
+            {
+                path: '/pontos',
+                element: <Pontos />
             },
             {
                 path: '*',
