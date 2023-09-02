@@ -14,7 +14,14 @@ return new class extends Migration
         Schema::create('pontos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-        });
+            $table->unsignedBigInteger('id_funcionario');
+            $table->dateTime('entrada');
+            $table->dateTime('saida');
+            $table->foreign('id_funcionario')->references('id')
+            ->on('funcionarios')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+         });
     }
 
     /**
