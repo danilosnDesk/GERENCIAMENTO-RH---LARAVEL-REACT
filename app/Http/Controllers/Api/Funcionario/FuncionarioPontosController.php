@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Funcionario;
 
-use App\Models\Pontos;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PontosController extends Controller
+class FuncionarioPontosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -34,15 +26,7 @@ class PontosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pontos $pontos)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pontos $pontos)
+    public function show(string $id)
     {
         //
     }
@@ -50,7 +34,7 @@ class PontosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pontos $pontos)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +42,7 @@ class PontosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pontos $pontos)
+    public function destroy(string $id)
     {
         //
     }

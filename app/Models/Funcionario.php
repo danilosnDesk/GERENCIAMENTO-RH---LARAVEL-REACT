@@ -24,6 +24,12 @@ class Funcionario extends Model
         return $this->belongsTo(Departamento::class, 'id_departamento');
     }
 
+    public function pontos()
+    {
+        return $this->hasMany(Pontos::class, 'id_funcionario', 'id');
+    }
+
+
     public function departamentosResponsavel()
     {
         return $this->hasMany(DepartamentoResponsavel::class, 'id_funcionario', 'id' );

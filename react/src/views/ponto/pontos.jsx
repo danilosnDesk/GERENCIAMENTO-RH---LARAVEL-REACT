@@ -6,44 +6,45 @@ import { UserCheck, UserCheck2, UserMinus, UserX } from "lucide-react";
 
 
 export default function Pontos() {
-    const status = ['active', 'off', 'done', 'ferias']
+    const status = ['active', 'off', 'done']
     const [ActiveTab, setActiveTab] = useState(status[0]);
-    const [Funcionarios, setFuncionarios] = useState(null);
+    const [Data, setData] = useState([]);
+    const [Loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axiosClient.get(`/funcionarios`)
-            .then((data) => {
-                setFuncionarios(data.data)
-                console.log(data.data);
+        setLoading(true)
+        axiosClient.get(`/pontos?${ActiveTab}=true`)
+            .then(({ data }) => {
+                setData(data.data)
+                setLoading(false)
             }).catch(err => {
+                setLoading(false)
                 console.log(err);
-            });
+            }).finally(() => {
+                setLoading(false)
+            })
     }, [ActiveTab]);
 
+    // The map error its becouse of display Data, is rendering when its null -- APLY LOADING rendering!! GYMMMM
     const displayFuncionarios = () => {
         switch (ActiveTab) {
             case "active":
-
-                return <TabelaPontos rule="active" />
-
+                return <TabelaPontos rule="active" data={Data} />
                 break;
             case "done":
-                return <TabelaPontos rule="done" />
+                return <TabelaPontos rule="done" data={Data} />
                 break;
             case "off":
-                return <TabelaPontos rule="off" />
-                break;
-            case "ferias":
-                return <TabelaPontos rule="ferias" />
+                return <TabelaPontos rule="off" data={Data} />
                 break;
             default:
                 break;
         }
     }
-
+    console.log(Data);
     return (
         <div className="py-4 px-8">
-            <div className="flex flex-row w-full justify-between py-5 ">
+            <div className="flex flex-row w-full justify-between py-5 flex-wrap ">
                 <div className="flex flex-col w-1/4 h-28 bg-emerald-500 dark:bg-slate-600 text-white p-4 mx-2 shadow-xl">
                     <UserCheck className="flex-shrink-0 w-5 h-5 text-white dark:text-white transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white" />
                     <h5 className="text-xs uppercase py-1">Activos</h5>
@@ -71,12 +72,14 @@ export default function Pontos() {
                         <li className={`transition dark:text-slate-300 cursor-pointer py-4 px-8 text-gray-700 ${ActiveTab === status[0] ? 'border-b-4 border-green-500 text-green-500' : 'hover:border-b-4 hover:border-green-500'}`} onClick={() => { setActiveTab(status[0]) }}>Entrada</li>
                         <li className={`transition dark:text-slate-300 cursor-pointer py-4 px-8 text-gray-700 ${ActiveTab === status[1] ? 'border-b-4 border-red-500 text-red-500' : 'hover:border-b-4 hover:border-red-500'}`} onClick={() => { setActiveTab(status[1]) }}>Em falta</li>
                         <li className={`transition dark:text-slate-300 cursor-pointer py-4 px-8 text-gray-700 ${ActiveTab === status[2] ? 'border-b-4 border-green-500 text-green-500' : 'hover:border-b-4 hover:border-green-500'}`} onClick={() => { setActiveTab(status[2]) }}>Terminado</li>
-                        <li className={`transition dark:text-slate-300 cursor-pointer py-4 px-8 text-gray-700 ${ActiveTab === status[3] ? 'border-b-4 border-orange-500 text-orange-500' : 'hover:border-b-4 hover:border-orange-500'}`} onClick={() => { setActiveTab(status[3]) }}>Em férias</li>
                     </ul>
                     <br />
 
-                    <div className={`w-full h-1 ${ActiveTab === status[0] && 'bg-green-500' || ActiveTab === status[1] && 'bg-red-500' || ActiveTab === status[2] && 'bg-green-500' || ActiveTab === status[3] && 'bg-orange-500'} dark:bg-gray-200 absolute top-0 left-0`}></div>
-                    {displayFuncionarios()}
+                    <div className={`w-full h-1 ${ActiveTab === status[0] && 'bg-green-500' || ActiveTab === status[1] && 'bg-red-500' || ActiveTab === status[2] && 'bg-green-500'} dark:bg-gray-200 absolute top-0 left-0`}></div>
+                    
+                    {Loading ? (
+                    'Carregando...'
+                    ):(displayFuncionarios())}
                 </div>
             </div>
         </div>
