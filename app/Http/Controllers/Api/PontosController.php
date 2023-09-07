@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pontos;
+use App\Models\Funcionario;
 use App\Http\Resources\PontosResource;
+use App\Http\Resources\FuncionarioResource;
 
 
 
@@ -45,9 +47,23 @@ class PontosController extends Controller
            $query->whereNotNull('entrada')->whereNotNull('saida');
         }
 
-        if (!$ano && !$mes) {
+        if ($off) {
+
+            $funcionariosComPontosHoje = Pontos::whereDate('created_at', now()->format('Y-m-d'))
+            ->pluck('id_funcionario')
+            ->toArray();
+
+
+            $funcionariosSemPontosHoje = Funcionario::whereNotIn('id', $funcionariosComPontosHoje)->get();
+
+            return FuncionarioResource::collection($funcionariosSemPontosHoje);
+        }
+
+
+        if (!$ano && !$mes && !$off) {
             $query->whereDate('created_at', now()->format('Y-m-d'));
         }
+
 
         $query->orderBy('created_at', 'asc');
         $pontos = $query->get();
