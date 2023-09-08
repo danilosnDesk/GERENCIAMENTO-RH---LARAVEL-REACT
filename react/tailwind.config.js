@@ -4,6 +4,7 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx}",
         "./node_modules/tw-elements-react/dist/js/**/*.js",
     ],
+    darkMode: 'class',
     theme: {
         extend: {},
     },

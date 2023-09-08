@@ -25,6 +25,19 @@ class PontosController extends Controller
         $off = $request->query('off'); // saida
         $done = $request->query('done'); // off
 
+        $PointedArray = Pontos::whereDate('created_at', now()->format('Y-m-d'))
+            ->pluck('id_funcionario')
+            ->toArray();
+        $Unpointed = Funcionario::whereNotIn('id', $PointedArray)->count();
+        $Pointed = Pontos::whereDate('created_at', now()->format('Y-m-d'))->count();
+
+        /*return [
+                    "Pontos" => FuncionarioResource::collection($funcionariosSemPontosHoje),
+                    "PointedNum" => $Unpointed,
+                    "UnpointedNum" => $Pointed,
+                    ];
+        */
+
         $query = Pontos::query();
 
         if ($ano) {
@@ -47,23 +60,20 @@ class PontosController extends Controller
            $query->whereNotNull('entrada')->whereNotNull('saida');
         }
 
+          if (!$ano && !$mes && !$off) {
+            $query->whereDate('created_at', now()->format('Y-m-d'));
+        }
+
         if ($off) {
 
             $funcionariosComPontosHoje = Pontos::whereDate('created_at', now()->format('Y-m-d'))
             ->pluck('id_funcionario')
             ->toArray();
 
-
             $funcionariosSemPontosHoje = Funcionario::whereNotIn('id', $funcionariosComPontosHoje)->get();
 
             return FuncionarioResource::collection($funcionariosSemPontosHoje);
         }
-
-
-        if (!$ano && !$mes && !$off) {
-            $query->whereDate('created_at', now()->format('Y-m-d'));
-        }
-
 
         $query->orderBy('created_at', 'asc');
         $pontos = $query->get();
@@ -73,22 +83,18 @@ class PontosController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->valudated($request);
-        require response($validated);
-    }
 
+    }
 
     public function show(string $id)
     {
         //
     }
 
-
     public function update(Request $request, string $id)
     {
         //
     }
-
 
     public function destroy(string $id)
     {

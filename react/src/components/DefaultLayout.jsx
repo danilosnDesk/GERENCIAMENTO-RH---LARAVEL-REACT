@@ -1,13 +1,41 @@
 
-import { Users2, Building2, Blocks, Landmark, Wrench, Info, LogOut, TimerIcon, TimerReset, Palette } from "lucide-react";
+import { Users2, Building2, Blocks, Landmark, Wrench, Info, LogOut, TimerIcon, TimerReset, Palette, Sun, Moon } from "lucide-react";
 import { Link, Navigate, Outlet } from 'react-router-dom'
 import { useStateContext } from '../context/ContextProvider'
 
 import axiosClient from '../axios-client';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function DefaultLayout() {
     const { user, token, setUser, setToken } = useStateContext();
+    const initialDarkMode = localStorage.getItem('tema') === 'dark';
+    const [darkMode, setDarkMode] = useState(initialDarkMode);
+
+    const toggleDarkMode = () => {
+        const newMode = !darkMode;
+        setDarkMode(newMode);
+        localStorage.setItem('tema', newMode ? 'dark' : 'light');
+
+        // Adicione ou remova a classe 'dark' do corpo do documento
+        if (newMode) {
+            document.body.classList.add('dark');
+        } else {
+            document.body.classList.remove('dark');
+        }
+    };
+
+
+    useEffect(() => {
+        if (darkMode) {
+            document.body.classList.add("dark");
+            localStorage.setItem('tema', 'dark')
+        } else {
+            document.body.classList.remove("dark");
+            localStorage.setItem('tema', 'light')
+
+        }
+    }, [darkMode]);
+
 
     if (!token) {
         return <Navigate to="/login" />
@@ -41,14 +69,14 @@ export default function DefaultLayout() {
 
     return (
         <div className="flex defaultLayout dark:bg-gray-900">
-            <aside className="w-[240px] p-4 bg-[#5b08a7] dark:bg-gray-800">
+            <aside className="h-screen w-[240px] p-4 bg-[#5b08a7] dark:bg-gray-800">
                 <div className="h-full pb-4 divide-y divide-slate-400 overflow-y-auto">
                     <div className="flex py-4 items-center justify-center text-white font-body">
                         <span className="text-lg text-center">RH MANAGEMENT </span>
                     </div>
                     <ul className="space-y-2 font-medium">
                         <Link to="/dashboard">
-                            <li>
+                            <li className="mt-4">
                                 <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                     <svg className="w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                                         <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
@@ -98,11 +126,12 @@ export default function DefaultLayout() {
                     </ul>
                     <br />
                     <ul className="space-y-2 font-medium">
-                        <li>
+                        <li onClick={toggleDarkMode} className="mt-4 cursor-pointer">
                             <span className="flex items-center p-2 text-white hover:text-gray-500 dark:hover:text-white rounded-lg dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <Palette className="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                                <span className="flex-1 ml-3 whitespace-nowrap">tema</span>
-                                <Wrench className="flex-shrink-0 w-5 h-5 text-white dark:text-slate-300 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white" />
+                                <span className="flex-1 ml-3 whitespace-nowrap">Alterar tema:</span>
+                                {!darkMode && <Sun className="flex-shrink-0 w-5 h-5 text-white dark:text-slate-300 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white" />}
+                                {darkMode && <Moon className="flex-shrink-0 w-5 h-5 text-white dark:text-slate-300 transition duration-75  group-hover:text-gray-900 dark:group-hover:text-white" />}
                             </span>
                         </li>
                         <Link to="/">
