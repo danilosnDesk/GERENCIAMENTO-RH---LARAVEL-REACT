@@ -19,13 +19,16 @@ class DepartamentoController extends Controller
     public function departamanto_funcionarios()
     {
         $data =Departamento::with('funcionarios')->get();
+        $det_names=[];
+        $det_total_func=[];
+        
         foreach ($data as $dep) {
             if ($dep->funcionarios->count()) {
                 $det_names[] = $dep->name;
                 $det_total_func[] = $dep->funcionarios->count();
             }
         }
-        return response(compact('det_names','det_total_func'),200);
+        return response()->json(array('det_names' => $det_names, 'det_total_func' => $det_total_func), 200);
     }
 
 
