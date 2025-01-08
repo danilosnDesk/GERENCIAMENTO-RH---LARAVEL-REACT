@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+    app:
+        image: laravel-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-app
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        networks:
+            - laravel-net
+        depends_on:
+            - mysql
+        environment:
+            - PHP_OPCACHE=1
+        ports:
+            - "9000:9000"
+
+    mysql:
+        image: mysql:8.0
+        container_name: laravel-mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: artspage
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: secret
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - laravel-net
+        ports:
+            - "3306:3306"
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        depends_on:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: secret
+        ports:
+            - "9091:91"
+        networks:
+            - laravel-net
+volumes:
+    mysql_data:
+
+networks:
+    laravel-net:
+        driver: bridge
